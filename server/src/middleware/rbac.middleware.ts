@@ -4,7 +4,7 @@ import type { AuthRequest } from '../types/index';
 /**
  * Middleware kiem tra vai tro nguoi dung (RBAC)
  */
-export function requireRole(...allowedRoles: string[]) {
+export function requireRole(allowedRoles: string[]) {
   return (req: AuthRequest, res: Response, next: NextFunction): void => {
     if (!req.user) {
       res.status(401).json({

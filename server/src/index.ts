@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv';
 import { pool } from './config/database';
 import authRoutes from './routes/auth.routes';
 import testRoutes from './routes/test.routes';
+import categoryRoutes from './routes/category.routes';
+import authorRoutes from './routes/author.routes';
 
 dotenv.config();
 
@@ -57,6 +59,8 @@ app.get('/api/health', async (req: Request, res: Response) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/authors', authorRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -78,12 +82,26 @@ app.use((err: Error, req: Request, res: Response, next: any) => {
 app.listen(port, () => {
   console.log('Server is running at http://localhost:' + port);
   console.log('API Documentation:');
+  console.log('   AUTH:');
   console.log('   - POST   /api/auth/register');
   console.log('   - POST   /api/auth/login');
   console.log('   - GET    /api/auth/profile');
+  console.log('   TEST RBAC:');
   console.log('   - GET    /api/test/reader');
   console.log('   - GET    /api/test/librarian');
   console.log('   - GET    /api/test/admin');
+  console.log('   CATEGORIES:');
+  console.log('   - GET    /api/categories');
+  console.log('   - GET    /api/categories/:id');
+  console.log('   - POST   /api/categories (librarian, admin)');
+  console.log('   - PUT    /api/categories/:id (librarian, admin)');
+  console.log('   - DELETE /api/categories/:id (admin)');
+  console.log('   AUTHORS:');
+  console.log('   - GET    /api/authors');
+  console.log('   - GET    /api/authors/:id');
+  console.log('   - POST   /api/authors (librarian, admin)');
+  console.log('   - PUT    /api/authors/:id (librarian, admin)');
+  console.log('   - DELETE /api/authors/:id (admin)');
 });
 
 export { pool };

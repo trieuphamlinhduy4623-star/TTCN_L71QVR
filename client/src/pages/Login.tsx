@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 interface LoginProps {
   onSwitchToRegister: () => void;
+  onLoginSuccess: (token: string, user: any) => void;
 }
 
-function Login({ onSwitchToRegister }: LoginProps) {
+function Login({ onSwitchToRegister, onLoginSuccess }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -28,8 +29,8 @@ function Login({ onSwitchToRegister }: LoginProps) {
 
       if (response.ok) {
         setMessage('Đăng nhập thành công!');
-        localStorage.setItem('token', data.data.token);
-        localStorage.setItem('user', JSON.stringify(data.data.user));
+        // Gọi callback để thông báo đăng nhập thành công
+        onLoginSuccess(data.data.token, data.data.user);
       } else {
         setMessage(data.message || 'Đăng nhập thất bại');
       }
