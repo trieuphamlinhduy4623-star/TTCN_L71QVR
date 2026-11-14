@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes';
 import testRoutes from './routes/test.routes';
 import categoryRoutes from './routes/category.routes';
 import authorRoutes from './routes/author.routes';
+import bookRoutes from './routes/book.routes';
 
 dotenv.config();
 
@@ -61,6 +62,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/authors', authorRoutes);
+app.use('/api/books', bookRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -95,13 +97,19 @@ app.listen(port, () => {
   console.log('   - GET    /api/categories/:id');
   console.log('   - POST   /api/categories (librarian, admin)');
   console.log('   - PUT    /api/categories/:id (librarian, admin)');
-  console.log('   - DELETE /api/categories/:id (admin)');
+  console.log('   - DELETE /api/categories/:id (librarian, admin)');
   console.log('   AUTHORS:');
   console.log('   - GET    /api/authors');
   console.log('   - GET    /api/authors/:id');
   console.log('   - POST   /api/authors (librarian, admin)');
   console.log('   - PUT    /api/authors/:id (librarian, admin)');
-  console.log('   - DELETE /api/authors/:id (admin)');
+  console.log('   - DELETE /api/authors/:id (librarian, admin)');
+  console.log('   BOOKS:');
+  console.log('   - GET    /api/books');
+  console.log('   - GET    /api/books/:id');
+  console.log('   - POST   /api/books (librarian, admin)');
+  console.log('   - PUT    /api/books/:id (librarian, admin)');
+  console.log('   - DELETE /api/books/:id (librarian, admin)');
 });
 
 export { pool };

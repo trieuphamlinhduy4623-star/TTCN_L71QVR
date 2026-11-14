@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Categories from './Categories';
 import Authors from './Authors';
+import Books from './Books';
 
 interface DashboardProps {
   token: string;
@@ -8,7 +9,7 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-type Tab = 'categories' | 'authors';
+type Tab = 'categories' | 'authors' | 'books';
 
 function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<Tab>('categories');
@@ -43,12 +44,19 @@ function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
         >
           Tác Giả
         </button>
+        <button 
+          className={`tab ${activeTab === 'books' ? 'active' : ''}`}
+          onClick={() => setActiveTab('books')}
+        >
+          Đầu Sách
+        </button>
       </div>
 
       {/* Content */}
       <div className="dashboard-content">
         {activeTab === 'categories' && <Categories token={token} userRole={userInfo?.role} />}
         {activeTab === 'authors' && <Authors token={token} userRole={userInfo?.role} />}
+        {activeTab === 'books' && <Books token={token} userRole={userInfo?.role} />}
       </div>
     </div>
   );
