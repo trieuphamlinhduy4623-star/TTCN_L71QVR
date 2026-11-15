@@ -8,6 +8,7 @@ import testRoutes from './routes/test.routes';
 import categoryRoutes from './routes/category.routes';
 import authorRoutes from './routes/author.routes';
 import bookRoutes from './routes/book.routes';
+import inventoryRoutes from './routes/inventory.routes';
 
 dotenv.config();
 
@@ -63,6 +64,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/authors', authorRoutes);
 app.use('/api/books', bookRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -110,6 +112,12 @@ app.listen(port, () => {
   console.log('   - POST   /api/books (librarian, admin)');
   console.log('   - PUT    /api/books/:id (librarian, admin)');
   console.log('   - DELETE /api/books/:id (librarian, admin)');
+  console.log('   INVENTORY:');
+  console.log('   - GET    /api/inventory/stats');
+  console.log('   - GET    /api/inventory');
+  console.log('   - GET    /api/inventory/low-stock');
+  console.log('   - POST   /api/inventory/:id/add (librarian, admin)');
+  console.log('   - PUT    /api/inventory/:id/adjust (librarian, admin)');
 });
 
 export { pool };
