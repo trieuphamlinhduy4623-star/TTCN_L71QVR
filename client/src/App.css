@@ -520,6 +520,7 @@ select {
   border-radius: 8px;
   font-size: 15px;
   background: white;
+  color: #333;
   cursor: pointer;
   transition: border-color 0.3s;
 }
@@ -527,6 +528,12 @@ select {
 select:focus {
   outline: none;
   border-color: #0ea5e9;
+}
+
+select option {
+  color: #333;
+  background: white;
+  padding: 10px;
 }
 
 /* Responsive form-row */

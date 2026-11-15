@@ -9,6 +9,8 @@ import categoryRoutes from './routes/category.routes';
 import authorRoutes from './routes/author.routes';
 import bookRoutes from './routes/book.routes';
 import inventoryRoutes from './routes/inventory.routes';
+import libraryCardRoutes from './routes/libraryCard.routes';
+import userRoutes from './routes/user.routes';
 
 dotenv.config();
 
@@ -65,6 +67,8 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/authors', authorRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/library-cards', libraryCardRoutes);
+app.use('/api/users', userRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -118,6 +122,13 @@ app.listen(port, () => {
   console.log('   - GET    /api/inventory/low-stock');
   console.log('   - POST   /api/inventory/:id/add (librarian, admin)');
   console.log('   - PUT    /api/inventory/:id/adjust (librarian, admin)');
+  console.log('   LIBRARY CARDS:');
+  console.log('   - GET    /api/library-cards (librarian, admin)');
+  console.log('   - GET    /api/library-cards/:id (librarian, admin)');
+  console.log('   - POST   /api/library-cards (librarian, admin)');
+  console.log('   - PUT    /api/library-cards/:id (librarian, admin)');
+  console.log('   - POST   /api/library-cards/:id/renew (librarian, admin)');
+  console.log('   - DELETE /api/library-cards/:id (admin)');
 });
 
 export { pool };

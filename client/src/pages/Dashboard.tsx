@@ -3,6 +3,7 @@ import Categories from './Categories';
 import Authors from './Authors';
 import Books from './Books';
 import Inventory from './Inventory';
+import LibraryCards from './LibraryCards';
 
 interface DashboardProps {
   token: string;
@@ -10,7 +11,7 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-type Tab = 'categories' | 'authors' | 'books' | 'inventory';
+type Tab = 'categories' | 'authors' | 'books' | 'inventory' | 'cards';
 
 function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<Tab>('categories');
@@ -57,6 +58,12 @@ function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
         >
           Tồn Kho
         </button>
+        <button 
+          className={`tab ${activeTab === 'cards' ? 'active' : ''}`}
+          onClick={() => setActiveTab('cards')}
+        >
+          Thẻ Độc Giả
+        </button>
       </div>
 
       {/* Content */}
@@ -65,6 +72,7 @@ function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
         {activeTab === 'authors' && <Authors token={token} userRole={userInfo?.role} />}
         {activeTab === 'books' && <Books token={token} userRole={userInfo?.role} />}
         {activeTab === 'inventory' && <Inventory token={token} userRole={userInfo?.role} />}
+        {activeTab === 'cards' && <LibraryCards token={token} userRole={userInfo?.role} />}
       </div>
     </div>
   );
