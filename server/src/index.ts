@@ -11,6 +11,7 @@ import bookRoutes from './routes/book.routes';
 import inventoryRoutes from './routes/inventory.routes';
 import libraryCardRoutes from './routes/libraryCard.routes';
 import userRoutes from './routes/user.routes';
+import settingRoutes from './routes/setting.routes';
 
 dotenv.config();
 
@@ -69,6 +70,7 @@ app.use('/api/books', bookRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/library-cards', libraryCardRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/settings', settingRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -129,6 +131,18 @@ app.listen(port, () => {
   console.log('   - PUT    /api/library-cards/:id (librarian, admin)');
   console.log('   - POST   /api/library-cards/:id/renew (librarian, admin)');
   console.log('   - DELETE /api/library-cards/:id (admin)');
+  console.log('   USERS:');
+  console.log('   - GET    /api/users (admin)');
+  console.log('   - GET    /api/users/:id (admin)');
+  console.log('   - POST   /api/users (admin)');
+  console.log('   - PUT    /api/users/:id (admin)');
+  console.log('   - POST   /api/users/:id/reset-password (admin)');
+  console.log('   - DELETE /api/users/:id (admin)');
+  console.log('   SETTINGS:');
+  console.log('   - GET    /api/settings (admin)');
+  console.log('   - GET    /api/settings/:key (admin)');
+  console.log('   - PUT    /api/settings/:key (admin)');
+  console.log('   - POST   /api/settings/batch (admin)');
 });
 
 export { pool };

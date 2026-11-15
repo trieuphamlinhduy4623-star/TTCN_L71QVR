@@ -4,6 +4,8 @@ import Authors from './Authors';
 import Books from './Books';
 import Inventory from './Inventory';
 import LibraryCards from './LibraryCards';
+import Users from './Users';
+import Settings from './Settings';
 
 interface DashboardProps {
   token: string;
@@ -11,7 +13,7 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-type Tab = 'categories' | 'authors' | 'books' | 'inventory' | 'cards';
+type Tab = 'categories' | 'authors' | 'books' | 'inventory' | 'cards' | 'users' | 'settings';
 
 function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<Tab>('categories');
@@ -64,6 +66,22 @@ function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
         >
           Thẻ Độc Giả
         </button>
+        {userInfo?.role === 'admin' && (
+          <>
+            <button 
+              className={`tab ${activeTab === 'users' ? 'active' : ''}`}
+              onClick={() => setActiveTab('users')}
+            >
+              Tài Khoản
+            </button>
+            <button 
+              className={`tab ${activeTab === 'settings' ? 'active' : ''}`}
+              onClick={() => setActiveTab('settings')}
+            >
+              Cấu Hình
+            </button>
+          </>
+        )}
       </div>
 
       {/* Content */}
@@ -73,6 +91,8 @@ function Dashboard({ token, userInfo, onLogout }: DashboardProps) {
         {activeTab === 'books' && <Books token={token} userRole={userInfo?.role} />}
         {activeTab === 'inventory' && <Inventory token={token} userRole={userInfo?.role} />}
         {activeTab === 'cards' && <LibraryCards token={token} userRole={userInfo?.role} />}
+        {activeTab === 'users' && <Users token={token} userRole={userInfo?.role} />}
+        {activeTab === 'settings' && <Settings token={token} userRole={userInfo?.role} />}
       </div>
     </div>
   );
